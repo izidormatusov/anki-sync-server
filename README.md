@@ -81,7 +81,7 @@ Installing
 
         location / {
             proxy_http_version   1.0;
-            proxy_pass           http://127.0.0.1:27702/;
+            proxy_pass           http://127.0.0.1:27701/;
             client_max_body_size 222M;
         }
     }
@@ -89,6 +89,15 @@ Installing
 
     Adding the line `client_max_body_size 222M;` to Nginx prevents bigger
     collections from not being able to sync due to size limitations.
+    
+    Alternative you can also use other web server like Caddy.
+    A minimal example for the Caddy web server:
+    ```Caddyfile
+    anki.example.com {
+	    reverse_proxy localhost:27701
+    }
+    ```
+    Caddy use tls as default and automatically "generate" Lets encrypt certificate for you.
 
 5. Run ankisyncd:
 
